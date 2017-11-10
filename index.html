@@ -1,0 +1,2188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+
+    <meta http-equiv="cache-control" content="no-store" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Summoners war, summoners war optimizer, rune optimizer, rune tool, optimizer, tool">
+    <meta name="description" content="Summoners War Optimizer is a tool to find out the best individual rune builds for your monsters.">
+
+    <title>Summoners War Optimizer</title>
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+
+    <!-- WinJS-Verweise -->
+    <link href="WinJS/css/ui-dark.min.css" rel="stylesheet" />
+    <script src="WinJS/js/base.min.js"></script>
+    <script src="WinJS/js/ui.min.js"></script>
+    <script src="js/FileSaver.js"></script>
+
+    <script src="Scripts/jquery-2.2.4.min.js"></script>
+    <script src="/js/subworkers.js"></script>
+    <script src="/js/countUp.js"></script>
+    <script src="/js/dragula.min.js"></script>
+
+    <script src="/js/globals.js"></script>
+    <script src="/js/texts.js"></script>
+    <script src="/js/helper.js"></script>
+    <script src="/js/dialogs.js"></script>
+    <script src="/js/swarfarm.js"></script>
+
+    <!-- Summoners_War_Optimizer-Verweise -->
+    <script src="/js/main.js"></script>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.dataTables.css" rel="stylesheet">
+    <link href="css/bootstrap-table.min.css" rel="stylesheet">
+    <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+    <link href="css/toggle-switch.css" rel="stylesheet" />
+    <link href="/css/slick.grid.css" rel="stylesheet" />
+    <link href="/css/select2.min.css" rel="stylesheet" />
+    <link href="/css/dragula.min.css" rel="stylesheet" />
+    <link href="themes/dark/style.css" rel="stylesheet" id="theme">
+
+    <script src="js/jquery.event.drag-2.3.0.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+
+    <script src="js/select2.min.js"></script>
+    <script src="js/list.min.js"></script>
+
+    <script src="js/slick.core.js"></script>
+    <script src="js/slick.grid.js"></script>
+    <script src="js/slick.dataview.js"></script>
+    <script src="js/slick.pager.js"></script>
+
+    <script src="js/settings.js"></script> 
+    <script src="js/optimizer.js"></script>
+    <script src="js/presets.js"></script>
+    <script src="js/speedtune.js"></script>
+    <script src="js/prioritylist.js"></script>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-82063910-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+</head>
+<body class="win-type-body">
+    <div id="app">
+        <div class="splitView" data-win-control="WinJS.UI.SplitView">
+            <!-- Pane area -->
+            <div>
+                <div class="header">
+                    <button class="win-splitviewpanetoggle"
+                            data-win-control="WinJS.UI.SplitViewPaneToggle"
+                            data-win-options="{ splitView: select('.splitView') }"></button>
+                    <div class="title">Menu</div>
+                </div>
+
+                <div class="nav-commands">
+                    <div class="active" data-win-control="WinJS.UI.SplitViewCommand" data-target="export" data-win-options="{ label: 'Export /  Import', icon: 'url(\'/themes/dark/images/import_icon.png\')', tooltip: 'Export /  Import', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="runes" data-win-options="{ label: 'Runes', icon: 'url(\'/themes/dark/images/rune_icon.png\')', tooltip: 'Runes', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="crafts-optimize" data-win-options="{ label: 'Enchantments and Grindstones', icon: 'url(\'/themes/dark/images/grindstones_icon.png\')', tooltip: 'Enchantments and Grindstones', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="monsters" data-win-options="{ label: 'Monsters', icon: 'url(\'/themes/dark/images/monster_icon.png\')', tooltip: 'Monsters', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="optimizer" data-win-options="{ label: 'Optimizer', icon: 'url(\'/themes/dark/images/optimize_icon.png\')', tooltip: 'Optimizer', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="prioritylist" data-win-options="{ label: 'Prioritylist', icon: 'url(\'/themes/dark/images/priolist_icon.png\')', tooltip: 'Prioritylist', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="speedtune" data-win-options="{ label: 'Speedtune', icon: 'url(\'/themes/dark/images/speedtune_icon.png\')', tooltip: 'Speedtune', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="settings" data-win-options="{ label: 'Settings', icon: 'url(\'/themes/dark/images/settings_icon.png\')', tooltip: 'Settings', oninvoked: mainSplitView.trailClicked}"></div>
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-target="notes" data-win-options="{ label: 'Notes', icon: 'url(\'/themes/dark/images/notes_icon.png\')', tooltip: 'Notes', oninvoked: mainSplitView.trailClicked}"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" id="main-header">
+                        <div class="myAlert alert alert-paypal alert-static"><p>DONATE</p><p class="alert-paypal-small">with</p><p class="alert-paypal-small">PAYPAL</p><img src="/images/paypal.png" /></div>
+                        <div id="header-logo"></div><div id="version-holder">v3.8.0</div>
+                    </div>
+                    <div class="col-md-12">
+                        <div role="tabpanel" id="main-panel" class="panel panel-default ebook">
+                            <div class="panel-heading no-padding">
+                                <p id="buildtab-label">Builds<span id="deleteAllBuilds" title="Close all builds">x</span></p>
+                                <ul class="nav nav-pills" role="tablist" id="buildtabHolder">
+
+                                </ul>
+
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="tab-content" id="buildtabHolderContents">
+                                    <!--TAB RUNES-->
+                                    <div role="tabpanel" class="tab-pane" id="runes">
+
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="panel panel-default" id="rune-panel">
+                                                    <div class="panel-heading">Rune details (* = required)</div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <label for="rune_id">Id</label>
+                                                                <input type="text" class="form-control" placeholder="Id" name="rune_id" id="rune_id" value="" readonly />
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <label for="rune_set">Set*</label>
+                                                                <select class="form-control" name="rune_set" id="rune_set">
+                                                                    <option value="Accuracy">Accuracy</option>
+                                                                    <option value="Blade">Blade</option>
+                                                                    <option value="Despair">Despair</option>
+                                                                    <option value="Destroy">Destroy</option>
+                                                                    <option value="Determination">Determination</option>
+                                                                    <option value="Endure">Endure</option>
+                                                                    <option value="Energy">Energy</option>
+                                                                    <option value="Enhance">Enhance</option>
+                                                                    <option value="Fatal">Fatal</option>
+                                                                    <option value="Fight">Fight</option>
+                                                                    <option value="Focus">Focus</option>
+                                                                    <option value="Guard">Guard</option>
+                                                                    <option value="Nemesis">Nemesis</option>
+                                                                    <option value="Rage">Rage</option>
+                                                                    <option value="Revenge">Revenge</option>
+                                                                    <option value="Shield">Shield</option>
+                                                                    <option value="Swift">Swift</option>
+                                                                    <option value="Tolerance">Tolerance</option>
+                                                                    <option value="Vampire">Vampire</option>
+                                                                    <option value="Violent">Violent</option>
+                                                                    <option value="Will">Will</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_slot">Slot(1-6)*</label>
+                                                                <select class="form-control" name="rune_slot" id="rune_slot">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <label for="rune_monster">Monster</label>
+                                                                <select class="form-control" name="rune_monster" id="rune_monster">
+                                                                    <option value="0">Inventory</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_grade">Grade(1-6)*</label>
+                                                                <select class="form-control" name="rune_grade" id="rune_grade">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_level">Level(0-15)*</label>
+                                                                <select class="form-control" name="rune_level" id="rune_level">
+                                                                    <option value="0">0</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <label for="rune_maintype">Main stat*</label>
+                                                                <select class="form-control" name="rune_maintype" id="rune_maintype">
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label for="rune_mainvalue">Value*</label>
+                                                                <input type="text" class="form-control" placeholder="value" name="rune_mainvalue" id="rune_mainvalue" value="" />
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_innatetype">Innate stat</label>
+                                                                <select class="form-control" name="rune_innatetype" id="rune_innatetype">
+                                                                    <option value="">-</option>
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label for="rune_innatevalue">value</label>
+                                                                <input type="text" class="form-control" placeholder="value" name="rune_innatevalue" id="rune_innatevalue" value="" />
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_stat1type">Stat 1</label>
+                                                                <select class="form-control" name="rune_stat1type" id="rune_stat1type">
+                                                                    <option value="">-</option>
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label for="rune_stat1value">Value</label>
+                                                                <input type="text" class="form-control" placeholder="value" name="rune_stat1value" id="rune_stat1value" value="" />
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_stat2type">Stat 2</label>
+                                                                <select class="form-control" name="rune_stat2type" id="rune_stat2type">
+                                                                    <option value="">-</option>
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label for="rune_stat2value">Value</label>
+                                                                <input type="text" class="form-control" placeholder="value" name="rune_stat2value" id="rune_stat2value" value="" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <label for="rune_stat3type">Stat 3</label>
+                                                                <select class="form-control" name="rune_stat3type" id="rune_stat3type">
+                                                                    <option value="">-</option>
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label for="rune_stat3value">Value</label>
+                                                                <input type="text" class="form-control" placeholder="value" name="rune_stat3value" id="rune_stat3value" value="" />
+                                                            </div>
+
+                                                            <div class="col-md-2">
+                                                                <label for="rune_stat4type">Stat 4</label>
+                                                                <select class="form-control" name="rune_stat4type" id="rune_stat4type">
+                                                                    <option value="">-</option>
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label for="rune_stat4value">Value</label>
+                                                                <input type="text" class="form-control" placeholder="value" name="rune_stat4value" id="rune_stat4value" value="" />
+                                                            </div>
+
+                                                            <button type="submit" class="btn btn-primary" id="rune_clear">Clear</button>
+                                                            <button type="submit" class="btn btn-primary" id="rune_update" disabled="disabled">Save current</button>
+                                                            <button type="submit" class="btn btn-primary" id="rune_create">Create new</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div id="rune_preview"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="runes-filter" class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-set">Set</label>
+                                                                <select class="form-control" name="runes-filter-set" id="runes-filter-set" data-column="2" multiple="multiple" style="width: 100%">
+                                                                    <option value="Accuracy">Accuracy</option>
+                                                                    <option value="Blade">Blade</option>
+                                                                    <option value="Despair">Despair</option>
+                                                                    <option value="Destroy">Destroy</option>
+                                                                    <option value="Determination">Determination</option>
+                                                                    <option value="Endure">Endure</option>
+                                                                    <option value="Energy">Energy</option>
+                                                                    <option value="Enhance">Enhance</option>
+                                                                    <option value="Fatal">Fatal</option>
+                                                                    <option value="Fight">Fight</option>
+                                                                    <option value="Focus">Focus</option>
+                                                                    <option value="Guard">Guard</option>
+                                                                    <option value="Nemesis">Nemesis</option>
+                                                                    <option value="Rage">Rage</option>
+                                                                    <option value="Revenge">Revenge</option>
+                                                                    <option value="Shield">Shield</option>
+                                                                    <option value="Swift">Swift</option>
+                                                                    <option value="Tolerance">Tolerance</option>
+                                                                    <option value="Vampire">Vampire</option>
+                                                                    <option value="Violent">Violent</option>
+                                                                    <option value="Will">Will</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-set">Stars</label>
+                                                                <input type="text" class="runes-filter-slider" id="runes-filter-stars" data-column="4" data-slider-min="1" data-slider-max="6" data-slider-step="1" data-slider-value="[1,6]">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="rune_stat3type">Location</label>
+                                                                <select class="form-control" name="runes-filter-location" id="runes-filter-location" data-column="1" data-type="special">
+                                                                    <option value="">Any</option>
+                                                                    <option value="inventory">Inventory</option>
+                                                                    <option value="monsters">Equipped on monsters</option>
+                                                                    <option value="storage">Equipped on monsters in storage</option>
+                                                                    <option value="monsterbox">Equipped on monsters in monster box</option>
+                                                                </select>
+                                                            </div>
+                                                            <button id="runes-filter-clear" class="btn btn-primary btn-xs" type="button">Clear</button>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-slot">Slot</label>
+                                                                <select class="form-control" name="runes-filter-slot" id="runes-filter-slot" data-column="3" multiple="multiple" style="width: 100%">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-set">Level</label>
+                                                                <input type="text" class="runes-filter-slider" id="runes-filter-stars" data-column="5" data-slider-min="0" data-slider-max="15" data-slider-step="1" data-slider-value="[0,15]">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="rune_stat3type">Lockstate</label>
+                                                                <select class="form-control" name="runes-filter-lockstate" id="runes-filter-lockstate" data-column="13" data-type="special">
+                                                                    <option value="">Any</option>
+                                                                    <option value="0">Unlocked</option>
+                                                                    <option value="1">Locked</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-mstat">Main Stat</label>
+                                                                <select class="form-control" name="runes-filter-mstat" id="runes-filter-mstat" data-column="9" multiple="multiple" style="width: 100%">
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-sstat">Substats</label>
+                                                                <select class="form-control" name="runes-filter-sstat" id="runes-filter-sstat" data-column="14" data-type="special" multiple="multiple" style="width: 100%">
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-quality">Quality</label>
+                                                                <select class="form-control" name="runes-filter-quality" id="runes-filter-quality" data-column="6" multiple="multiple" style="width: 100%">
+                                                                    <option value="Unknown">Unknown</option>
+                                                                    <option value="Common">Common</option>
+                                                                    <option value="Magic">Magic</option>
+                                                                    <option value="Rare">Rare</option>
+                                                                    <option value="Hero">Hero</option>
+                                                                    <option value="Legend">Legend</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="runes-filter-quality">Grindable / Enchantable</label>
+                                                                <select class="form-control" name="runes-filter-amplifiable" id="runes-filter-amplifiable" data-column="1000" data-type="special" multiple="multiple" style="width: 100%">
+                                                                    <option value="G">Grindable</option>
+                                                                    <option value="GUngrinded">Grindable (At least one stat ungrinded)</option>
+                                                                    <option value="E">Enchantable</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">
+                                                        <div id="runes-filter-toggle">Filters</div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="right">
+                                                                    <button type="submit" class="btn btn-danger btn-xs" id="deleteAllRunes">Delete All</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs" id="unlockAllRunes">Unlock All</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs" id="lockAllEquippedRunes">Lock All Equipped</button>
+                                                                    <!--<button type="submit" class="btn btn-primary btn-xs" id="unequipAllRunes">Unequip All</button>-->
+                                                                    <button type="submit" class="btn btn-primary btn-xs exportAsCSV" data-name="runes">Export as CSV</button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        All runes
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <table id="grid_runes" class="table table-bordered table-hover display">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th rowspan="2">ID</th>
+                                                                    <th rowspan="2">Location</th>
+                                                                    <th rowspan="2">Set</th>
+                                                                    <th rowspan="2">Slot</th>
+                                                                    <th rowspan="2">Grade</th>
+                                                                    <th rowspan="2">Level</th>
+                                                                    <th rowspan="2">Quality</th>
+                                                                    <th rowspan="2">Eff.%</th>
+                                                                    <th rowspan="2">Eff.% Max</th>
+                                                                    <th colspan="2">Main stat</th>
+                                                                    <th colspan="2">Innate stat</th>
+                                                                    <th rowspan="2">Action</th>
+                                                                    <th colspan="11" style="text-align:center;">Substats</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Type</th>
+                                                                    <th>Value</th>
+                                                                    <th>Type</th>
+                                                                    <th>Value</th>
+                                                                    <th>ATK%</th>
+                                                                    <th>ATK</th>
+                                                                    <th>DEF%</th>
+                                                                    <th>DEF</th>
+                                                                    <th>HP%</th>
+                                                                    <th>HP</th>
+                                                                    <th>SPD</th>
+                                                                    <th>ACC</th>
+                                                                    <th>RES</th>
+                                                                    <th>CRate</th>
+                                                                    <th>CDmg</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <!--TAB CRAFTS-->
+                                    <div role="tabpanel" class="tab-pane" id="crafts">
+                                        <div class="craftsToggleWrapper">
+                                            <div class="craftsToggleOptimize craftsTypeToggle">Optimize</div>
+                                            <div class="craftsToggleData craftsTypeToggle active">Stones & Gems</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="right">
+                                                                    <button type="submit" class="btn btn-danger btn-xs" id="deleteAllCrafts">Delete All</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs exportAsCSV" data-name="crafts">Export as CSV</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        All enchantments and grindstones
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <table id="grid_crafts" class="table table-bordered table-hover display">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>ID</th>
+                                                                    <th>Type</th>
+                                                                    <th>Set</th>
+                                                                    <th>Stat</th>
+                                                                    <th>Grade</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th><button class="btn btn-primary btn-xs table-clear" type="submit">Clear</button></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">Create and edit (* = required)</div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label for="craft_id">Id</label>
+                                                                <input type="text" class="form-control" placeholder="Id" name="craft_id" id="craft_id" value="" readonly />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="craft_type">Type*</label>
+                                                                <select class="form-control" name="craft_type" id="craft_type">
+                                                                    <option value="E">Enchantment</option>
+                                                                    <option value="G">Grindstone</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <label for="craft_set">Set*</label>
+                                                                <select class="form-control" name="craft_set" id="craft_set">
+                                                                    <option value="Accuracy">Accuracy</option>
+                                                                    <option value="Blade">Blade</option>
+                                                                    <option value="Despair">Despair</option>
+                                                                    <option value="Destroy">Destroy</option>
+                                                                    <option value="Determination">Determination</option>
+                                                                    <option value="Endure">Endure</option>
+                                                                    <option value="Energy">Energy</option>
+                                                                    <option value="Enhance">Enhance</option>
+                                                                    <option value="Fatal">Fatal</option>
+                                                                    <option value="Fight">Fight</option>
+                                                                    <option value="Focus">Focus</option>
+                                                                    <option value="Guard">Guard</option>
+                                                                    <option value="Nemesis">Nemesis</option>
+                                                                    <option value="Rage">Rage</option>
+                                                                    <option value="Revenge">Revenge</option>
+                                                                    <option value="Shield">Shield</option>
+                                                                    <option value="Swift">Swift</option>
+                                                                    <option value="Tolerance">Tolerance</option>
+                                                                    <option value="Vampire">Vampire</option>
+                                                                    <option value="Violent">Violent</option>
+                                                                    <option value="Will">Will</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-6">
+                                                                <label for="craft_stat">Stat*</label>
+                                                                <select class="form-control" name="craft_stat" id="craft_stat">
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                    <option value="RES">RES</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="craft_grade">Grade*</label>
+                                                                <select class="form-control" name="craft_grade" id="craft_grade">
+                                                                    <option value="2">Magic</option>
+                                                                    <option value="3">Rare</option>
+                                                                    <option value="4">Hero</option>
+                                                                    <option value="5">Legend</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <button type="submit" class="btn btn-primary" id="craft_update" disabled>Save current</button>
+                                                                <button type="submit" class="btn btn-primary" id="craft_create">Create new</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--TAB CRAFTS OPTIMIZE-->
+                                    <div role="tabpanel" class="tab-pane" id="crafts-optimize">
+                                        <div class="craftsToggleWrapper">
+                                            <div class="craftsToggleOptimize craftsTypeToggle active">Optimize</div>
+                                            <div class="craftsToggleData craftsTypeToggle">Stones & Gems</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">
+                                                        <div class="right">
+                                                            <button class="btn btn-primary btn-xs" id="refreshGrindstoneOptimize" type="submit">Refresh</button>
+                                                        </div>
+                                                        <div class="craft-headline"><span>Grindstone</span> your monsters</div>
+                                                        <select class="form-control monster-select" name="crafts-monsters" id="crafts-monsters" style="width: 20%">
+                                                            <option value="0">-</option>
+                                                        </select>
+                                                        <div class="crafts-filters"><div class="crafts-filter active" data-mode="G">Grindstone</div><div class="crafts-filter" data-mode="E">Enchantment</div></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-7 crafts-equipped-runes">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">
+                                                        <span class="crafts-monster-runes"></span> - Runes
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+
+                                                            <div class="col-md-4">
+                                                                <br /><br />
+                                                                <div id="m6_rune"></div>
+
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div id="m1_rune"></div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <br /><br />
+                                                                <div id="m2_rune"></div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <br />
+                                                        <div class="row">
+
+                                                            <div class="col-md-4">
+                                                                <div id="m5_rune"></div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <br /><br />
+                                                                <div id="m4_rune"></div>
+
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div id="m3_rune"></div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 crafts-optimizedrune">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading crafts-optimizedrune-header">Rune</div>
+                                                    <div class="panel-body">
+                                                        <div class="crafts-grindstones-wrapper">
+                                                            <div class="crafts-grindstones-head">
+                                                                <div class="row">
+                                                                    <div class="col-md-3 col-md-offset-3">PowerUp</div>
+                                                                    <div class="col-md-3">Grade</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="crafts-grindstones-body">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!--TAB MONSTERS-->
+                                    <div role="tabpanel" class="tab-pane" id="monsters">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div id="monsterStatToggleWrapper">
+                                                                    <div id="monsterShowBaseStats" class="monsterStatToggle active">Base stats</div>
+                                                                    <div id="monsterShowActualStats" class="monsterStatToggle">Actual stats</div>
+                                                                </div>
+                                                                <div class="right">
+                                                                    <button type="submit" class="btn btn-danger btn-xs" id="deleteAllMons">Delete All</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs btn-orange" id="monsterCreate">Create Monster</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs exportAsCSV" data-name="mons">Export as CSV</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs" id="showShareDialog">Share</button>
+                                                                    <p id="shareData"><span id="shareCountActual">0</span> / <span id="shareCountMax">6</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        All monsters
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <table id="grid_monsters" class="table table-bordered table-hover display">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th rowspan="2">ID</th>
+                                                                    <th rowspan="2">Name</th>
+                                                                    <th rowspan="2">Level</th>
+                                                                    <th colspan="16" id="monsterStatText">Base stats</th>
+                                                                    <th colspan="4">Additional Info</th>
+                                                                    <th rowspan="2">Action</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>HP</th>
+                                                                    <th>ATK</th>
+                                                                    <th>DEF</th>
+                                                                    <th>SPD</th>
+                                                                    <th>CRate</th>
+                                                                    <th>CDmg</th>
+                                                                    <th>RES</th>
+                                                                    <th>ACC</th>
+                                                                    <th>HP</th>
+                                                                    <th>ATK</th>
+                                                                    <th>DEF</th>
+                                                                    <th>SPD</th>
+                                                                    <th>CRate</th>
+                                                                    <th>CDmg</th>
+                                                                    <th>RES</th>
+                                                                    <th>ACC</th>
+                                                                    <th>DMG</th>
+                                                                    <th>Eff.HP</th>
+                                                                    <th>Avg. Eff.%</th>
+                                                                    <th>Runes</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="panel panel-default skewd monster-total-stats" id="allrune-panel">
+                                                    <div class="panel-heading">Total monster stats</div>
+                                                    <div class="panel-body" id="monster_panel2">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="monster-speedtuning">
+                                                    <div class="optimizer-misc-desc adjustment">Spd Tune</div>
+                                                    <label class="label-inline" for="opt_speed_lead_monster">Lead</label>
+                                                    <select class="form-control label-inline-input" name="opt_speed_lead_monster" id="opt_speed_lead_monster">
+                                                        <option value="0">-</option>
+                                                        <option value="10">10%</option>
+                                                        <option value="13">13%</option>
+                                                        <option value="19">19%</option>
+                                                        <option value="23">23%</option>
+                                                        <option value="24">24%</option>
+                                                        <option value="28">28%</option>
+                                                        <option value="30">30%</option>
+                                                        <option value="33">33%</option>
+                                                    </select>
+                                                    <label class="label-inline" for="opt_speed_totem_monster">Totem</label>
+                                                    <select class="form-control label-inline-input" name="opt_speed_totem_monster" id="opt_speed_totem_monster">
+                                                        <option value="0">-</option>
+                                                        <option value="2">2%</option>
+                                                        <option value="3">3%</option>
+                                                        <option value="5">5%</option>
+                                                        <option value="6">6%</option>
+                                                        <option value="8">8%</option>
+                                                        <option value="9">9%</option>
+                                                        <option value="11">11%</option>
+                                                        <option value="12">12%</option>
+                                                        <option value="14">14%</option>
+                                                        <option value="15">15%</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-7">
+                                                <div class="panel panel-default" id="allrune-panel">
+                                                    <div class="panel-heading">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="right">
+                                                                    <button type="submit" class="btn btn-danger btn-xs" id="deleteMonsRunes" disabled="">Delete Runes</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs" id="unequipMonsRunes" disabled="">Unequip runes</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs" id="lockMonsRunes" disabled="">Lock runes</button>
+                                                                    <button type="submit" class="btn btn-primary btn-xs" id="unlockMonsRunes" disabled="">Unlock Runes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        Equipped runes
+                                                    </div>
+                                                    <div class="panel-body" id="monster_panel3">
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-4">
+                                                                <br /><br />
+                                                                <div id="m6_rune"></div>
+
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div id="m1_rune"></div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <br /><br />
+                                                                <div id="m2_rune"></div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <br />
+                                                        <div class="row">
+
+                                                            <div class="col-md-4">
+                                                                <div id="m5_rune"></div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <br /><br />
+                                                                <div id="m4_rune"></div>
+
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div id="m3_rune"></div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!--TAB OPTIMIZER-->
+                                    <div role="tabpanel" class="tab-pane" id="optimizer">
+                                        <!-- CONDITIONS -->
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="panel panel-default" id="panel-optimizer-monster">
+                                                    <div class="panel-heading">Pick a monster<div class="pull-right"><button class="btn btn-primary btn-xs" id="view-monster-opt" type="submit">View</button></div></div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <select class="form-control monster-select" name="opt_monster" id="opt_monster" style="width: 100%">
+                                                                    <option value="0">-</option>
+                                                                    <option value="1">Soha</option>
+                                                                    <option value="2">Zeratu</option>
+                                                                    <option value="3">Ramagos</option>
+                                                                </select>
+                                                                <div class="checkbox">
+                                                                    <input type="checkbox" class="settings" data-setting="optimizer_autofillParams" value="" id="optimizer_autofillParams"><label for="optimizer_autofillParams"></label>
+                                                                    <div class="checkbox-label" data-checkbox="optimizer_autofillParams">Autofill current sets & stats <div class="information-tooltips" data-name="optimizer_autofillParams"></div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row base-stats">
+                                                            <div class="monsterStatsToggleWrapper">
+                                                                <div class="monsterStatsToggle" data-mode="b">Base</div>
+                                                                <div class="monsterStatsToggle active" data-mode="a">Actual</div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mstats" data-stat="hp">HP: <span>0</span></div>
+                                                                <div class="mstats" data-stat="atk">ATK: <span>0</span></div>
+                                                                <div class="mstats" data-stat="def">DEF: <span>0</span></div>
+                                                                <div class="mstats" data-stat="spd">SPD: <span>0</span></div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mstats" data-stat="crate">Crit: <span>0</span></div>
+                                                                <div class="mstats" data-stat="cdmg">CDmg: <span>0</span></div>
+                                                                <div class="mstats" data-stat="res">RES: <span>0</span></div>
+                                                                <div class="mstats" data-stat="acc">ACC: <span>0</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default" id="panel-optimizer-sets">
+                                                    <div class="panel-heading">Sets<div class="information-tooltips" data-name="sets"></div>
+                                                        <div class="pull-right">
+                                                            <button class="btn btn-danger btn-xs panel-clear" style="margin-top: 1px;" type="submit">Clear</button>
+                                                            <div id="preset-wrapper">
+                                                                <select class="form-control" name="select_preset" id="select_preset">
+                                                                    <option value="">Presets</option>
+                                                                </select>
+                                                                <div class="preset-action" title="Manage presets" id="preset-manage"><span class="glyphicon glyphicon-cog"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6 no-padding">
+                                                                <label class="label-inline" for="opt_set1">Set 1</label>
+                                                                <select class="form-control label-inline-input trigger-estimated" name="opt_set1" id="opt_set1">
+                                                                    <option value="">-</option>
+                                                                    <option value="Accuracy">Accuracy</option>
+                                                                    <option value="Blade">Blade</option>
+                                                                    <option value="Despair">Despair</option>
+                                                                    <option value="Destroy">Destroy</option>
+                                                                    <option value="Determination">Determination</option>
+                                                                    <option value="Endure">Endure</option>
+                                                                    <option value="Energy">Energy</option>
+                                                                    <option value="Enhance">Enhance</option>
+                                                                    <option value="Fatal">Fatal</option>
+                                                                    <option value="Fight">Fight</option>
+                                                                    <option value="Focus">Focus</option>
+                                                                    <option value="Guard">Guard</option>
+                                                                    <option value="Nemesis">Nemesis</option>
+                                                                    <option value="Rage">Rage</option>
+                                                                    <option value="Revenge">Revenge</option>
+                                                                    <option value="Shield">Shield</option>
+                                                                    <option value="Swift">Swift</option>
+                                                                    <option value="Tolerance">Tolerance</option>
+                                                                    <option value="Vampire">Vampire</option>
+                                                                    <option value="Violent">Violent</option>
+                                                                    <option value="Will">Will</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <label class="label-inline" for="opt_slot2">Slot 2</label>
+                                                                <select class="form-control label-inline-input trigger-estimated" name="opt_slot2" id="opt_slot2" multiple="multiple" style="width: 65%">
+                                                                    <option value="SPD">SPD</option>
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6 no-padding">
+                                                                <label class="label-inline" for="opt_set2">Set 2</label>
+                                                                <select class="form-control label-inline-input trigger-estimated" name="opt_set2" id="opt_set2">
+                                                                    <option value="">-</option>
+                                                                    <option value="Accuracy">Accuracy</option>
+                                                                    <option value="Blade">Blade</option>
+                                                                    <option value="Despair">Despair</option>
+                                                                    <option value="Destroy">Destroy</option>
+                                                                    <option value="Determination">Determination</option>
+                                                                    <option value="Endure">Endure</option>
+                                                                    <option value="Energy">Energy</option>
+                                                                    <option value="Enhance">Enhance</option>
+                                                                    <option value="Fatal">Fatal</option>
+                                                                    <option value="Fight">Fight</option>
+                                                                    <option value="Focus">Focus</option>
+                                                                    <option value="Guard">Guard</option>
+                                                                    <option value="Nemesis">Nemesis</option>
+                                                                    <option value="Rage">Rage</option>
+                                                                    <option value="Revenge">Revenge</option>
+                                                                    <option value="Shield">Shield</option>
+                                                                    <option value="Swift">Swift</option>
+                                                                    <option value="Tolerance">Tolerance</option>
+                                                                    <option value="Vampire">Vampire</option>
+                                                                    <option value="Violent">Violent</option>
+                                                                    <option value="Will">Will</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <label class="label-inline" for="opt_slot4">Slot 4</label>
+                                                                <select class="form-control label-inline-input trigger-estimated" name="opt_slot4" id="opt_slot4" multiple="multiple" style="width: 65%">
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="CRate">CRate</option>
+                                                                    <option value="CDmg">CDmg</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6 no-padding">
+                                                                <label class="label-inline" for="opt_set3">Set 3</label>
+                                                                <select class="form-control label-inline-input trigger-estimated" name="opt_set3" id="opt_set3">
+                                                                    <option value="">-</option>
+                                                                    <option value="Accuracy">Accuracy</option>
+                                                                    <option value="Blade">Blade</option>
+                                                                    <option value="Despair">Despair</option>
+                                                                    <option value="Destroy">Destroy</option>
+                                                                    <option value="Determination">Determination</option>
+                                                                    <option value="Endure">Endure</option>
+                                                                    <option value="Energy">Energy</option>
+                                                                    <option value="Enhance">Enhance</option>
+                                                                    <option value="Fatal">Fatal</option>
+                                                                    <option value="Fight">Fight</option>
+                                                                    <option value="Focus">Focus</option>
+                                                                    <option value="Guard">Guard</option>
+                                                                    <option value="Nemesis">Nemesis</option>
+                                                                    <option value="Rage">Rage</option>
+                                                                    <option value="Revenge">Revenge</option>
+                                                                    <option value="Shield">Shield</option>
+                                                                    <option value="Swift">Swift</option>
+                                                                    <option value="Tolerance">Tolerance</option>
+                                                                    <option value="Vampire">Vampire</option>
+                                                                    <option value="Violent">Violent</option>
+                                                                    <option value="Will">Will</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <label class="label-inline" for="opt_slot6">Slot 6</label>
+                                                                <select class="form-control label-inline-input trigger-estimated" name="opt_slot6" id="opt_slot6" multiple="multiple" style="width: 65%">
+                                                                    <option value="ATK%">ATK%</option>
+                                                                    <option value="ATK flat">ATK flat</option>
+                                                                    <option value="DEF%">DEF%</option>
+                                                                    <option value="DEF flat">DEF flat</option>
+                                                                    <option value="HP%">HP%</option>
+                                                                    <option value="HP flat">HP flat</option>
+                                                                    <option value="RES">RES</option>
+                                                                    <option value="ACC">ACC</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row optimizer-misc">
+                                                            <div class="col-md-6 no-padding">
+                                                                <div class="flex-wrapper">
+                                                                    <div class="optimizer-misc-desc">Exclude</div>
+                                                                    <label class="label-inline" for="opt_sets_exclude">Sets</label>
+                                                                    <select class="form-control label-inline-input trigger-estimated" name="opt_sets_exclude" id="opt_sets_exclude" multiple="multiple" style="width: 65%">
+                                                                        <option value="Accuracy">Accuracy</option>
+                                                                        <option value="Blade">Blade</option>
+                                                                        <option value="Despair">Despair</option>
+                                                                        <option value="Destroy">Destroy</option>
+                                                                        <option value="Determination">Determination</option>
+                                                                        <option value="Endure">Endure</option>
+                                                                        <option value="Energy">Energy</option>
+                                                                        <option value="Enhance">Enhance</option>
+                                                                        <option value="Fatal">Fatal</option>
+                                                                        <option value="Fight">Fight</option>
+                                                                        <option value="Focus">Focus</option>
+                                                                        <option value="Guard">Guard</option>
+                                                                        <option value="Nemesis">Nemesis</option>
+                                                                        <option value="Rage">Rage</option>
+                                                                        <option value="Revenge">Revenge</option>
+                                                                        <option value="Shield">Shield</option>
+                                                                        <option value="Swift">Swift</option>
+                                                                        <option value="Tolerance">Tolerance</option>
+                                                                        <option value="Vampire">Vampire</option>
+                                                                        <option value="Violent">Violent</option>
+                                                                        <option value="Will">Will</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div id="optimizer-goptimization" class="col-md-6 no-padding-right">
+                                                                <div class="optimizer-misc-desc adjustment">Grind</div>
+                                                                <label class="label-inline" for="opt_goptimization">Use Grinds</label>
+                                                                <fieldset>
+                                                                    <div class="switch-toggle switch-holo">
+                                                                        <input id="goptimization-off" name="goptimization" value="off" type="radio" checked="checked">
+                                                                        <label for="goptimization-off" onclick="">Off</label>
+
+                                                                        <input id="goptimization-min" name="goptimization" value="min" type="radio">
+                                                                        <label for="goptimization-min" onclick="">Min</label>
+
+                                                                        <input id="goptimization-max" name="goptimization" value="max" type="radio">
+                                                                        <label for="goptimization-max" onclick="">Max</label>
+
+                                                                        <a></a>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row optimizer-misc">
+                                                            <div class="col-md-6 no-padding">
+                                                                <div class="optimizer-misc-desc">Spd Tune</div>
+                                                                <label class="label-inline" for="opt_speed_lead">Lead</label>
+                                                                <select class="form-control label-inline-input" name="opt_speed_lead" id="opt_speed_lead">
+                                                                    <option value="0">-</option>
+                                                                    <option value="10">10%</option>
+                                                                    <option value="13">13%</option>
+                                                                    <option value="19">19%</option>
+                                                                    <option value="23">23%</option>
+                                                                    <option value="24">24%</option>
+                                                                    <option value="28">28%</option>
+                                                                    <option value="30">30%</option>
+                                                                    <option value="33">33%</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <label class="label-inline" for="opt_speed_totem">Totem</label>
+                                                                <select class="form-control label-inline-input" name="opt_speed_totem" id="opt_speed_totem">
+                                                                    <option value="0">-</option>
+                                                                    <option value="2">2%</option>
+                                                                    <option value="3">3%</option>
+                                                                    <option value="5">5%</option>
+                                                                    <option value="6">6%</option>
+                                                                    <option value="8">8%</option>
+                                                                    <option value="9">9%</option>
+                                                                    <option value="11">11%</option>
+                                                                    <option value="12">12%</option>
+                                                                    <option value="14">14%</option>
+                                                                    <option value="15">15%</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="checkbox space">
+                                                                    <input type="checkbox" value="" id="opt_no_broken"><label for="opt_no_broken"></label>
+                                                                    <div class="checkbox-label" data-checkbox="opt_no_broken">No broken sets</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <div class="checkbox space">
+                                                                    <input type="checkbox" value="" id="optFillRunes"><label for="optFillRunes"></label>
+                                                                    <div class="checkbox-label" data-checkbox="optFillRunes">Fill missing rune slots</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="optimizer-bonusSets" class="row">
+                                                            <div class="col-md-12 no-padding">
+                                                                <div class="optimizer-bonusSet" data-type="atk" data-bonus="8" data-count="0"><p>Fight Set</p><p>+8% Atk</p><span class="optimizer-bonusSet-count"></span></div>
+                                                                <div class="optimizer-bonusSet" data-type="hp" data-bonus="8" data-count="0"><p>Enhance Set</p><p>+8% HP</p><span class="optimizer-bonusSet-count"></span></div>
+                                                                <div class="optimizer-bonusSet" data-type="def" data-bonus="8" data-count="0"><p>Deter. Set</p><p>+8% Def</p><span class="optimizer-bonusSet-count"></span></div>
+                                                                <div class="optimizer-bonusSet" data-type="acc" data-bonus="10" data-count="0"><p>Acc Set</p><p>+10% Acc</p><span class="optimizer-bonusSet-count"></span></div>
+                                                                <div class="optimizer-bonusSet" data-type="res" data-bonus="10" data-count="0"><p>Tol Set</p><p>+10% Res</p><span class="optimizer-bonusSet-count"></span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="optimizer-bonusSet-toggle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="panel panel-default" id="panel-optimizer-options">
+                                                    <div class="panel-heading">Options<div class="information-tooltips" data-name="optimizer_options"></div></div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="checkbox no-margin-top">
+                                                                    <input type="checkbox" value="" id="opt_use_locked" class="trigger-estimated"><label for="opt_use_locked"></label>
+                                                                    <div class="checkbox-label" data-checkbox="opt_use_locked">Use locked runes</div>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <input type="checkbox" value="" id="opt_use_locked_prevent_equipped" class="trigger-estimated"><label for="opt_use_locked_prevent_equipped"></label>
+                                                                    <div class="checkbox-label" data-checkbox="opt_use_locked_prevent_equipped">Ignore locked runes even if equipped on this monster</div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="checkbox">
+                                                                    <input type="checkbox" value="" checked="checked" id="opt_only_unequipped" class="trigger-estimated"><label for="opt_only_unequipped"></label>
+                                                                    <div class="checkbox-label" id="opt_only_unequipped-label" data-checkbox="opt_only_unequipped">Use only runes from inventory</div>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <input type="checkbox" value="" id="optSubslotsNoMax"><label for="optSubslotsNoMax"></label>
+                                                                    <div class="checkbox-label" data-checkbox="optSubslotsNoMax">Max. +12 for slots 1,3,5</div>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <input type="checkbox" value="" id="opt_only_6star" class="trigger-estimated"><label for="opt_only_6star"></label>
+                                                                    <div class="checkbox-label" data-checkbox="opt_only_6star">Use only 6* runes for slots 2,4,6</div>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <input type="checkbox" value="" id="opt_only_56star" class="trigger-estimated"><label for="opt_only_56star"></label>
+                                                                    <div class="checkbox-label" data-checkbox="opt_only_56star">Use only 5/6* runes</div>
+                                                                </div>
+                                                                <div><label for="opt_use_runes">Include these runes</label><input type="text" class="form-control trigger-estimated" id="opt_use_runes" placeholder="ex:11,12,70" value="" /></div>
+                                                                <div><label for="opt_not_use_runes">Do not include these runes</label><input type="text" id="opt_not_use_runes" class="form-control trigger-estimated" placeholder="ex:11,12,70" value="" /></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-3">
+                                                <div class="panel panel-default" id="panel-optimizer-focus">
+                                                    <div class="panel-heading">Focus<div class="information-tooltips" data-name="focus"></div><div class="pull-right"><button class="btn btn-danger btn-xs panel-clear" type="submit">Clear</button></div></div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12 no-padding">
+                                                                <div class="form-group">
+                                                                    <select class="form-control label-inline-input trigger-estimated" name="opt_focus" id="opt_focus" multiple="multiple" style="width: 100%">
+                                                                        <option value="HP">HP</option>
+                                                                        <option value="ATK">ATK</option>
+                                                                        <option value="DEF">DEF</option>
+                                                                        <option value="SPD">SPD</option>
+                                                                        <option value="CRate">CRate</option>
+                                                                        <option value="CDmg">CDmg</option>
+                                                                        <option value="RES">RES</option>
+                                                                        <option value="ACC">ACC</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 no-padding">
+                                                                <label for="opt_focus_count" style="width: 60%;" class="label-inline">Search depth</label>
+                                                                <input type="text" class="form-control trigger-estimated" size="5" id="opt_focus_count" value="" />
+                                                            </div>
+                                                        </div>
+                                                        <div id="focus-weights" class="row">
+                                                            <div class="information-tooltips" data-name="focusWeights"></div>
+                                                            <div class="col-md-6 first">
+
+                                                            </div>
+                                                            <div class="col-md-6 second">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default" id="panel-optimizer-filters">
+                                                    <div class="panel-heading">Filters<div class="information-tooltips" data-name="filters"></div><div class="pull-right"><button id="rune_optimize_filter_clear" class="btn btn-danger btn-xs" type="submit">Clear</button><button id="rune_optimize_filter_adapt" class="btn btn-primary btn-xs" type="submit" title="Use your monster's actual stats for these filters.">Adapt</button><button id="rune_optimize_filter_apply" class="btn btn-primary btn-xs" type="submit">Apply</button></div></div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6 no-padding">
+                                                                <div class="optimizer-filter-min">Min</div><div class="optimizer-filter-max">Max</div>
+                                                                <input type="text" class="form-control" size="5" id="filter_min_hp" value="" /><label class="label-inline">HP</label><input type="text" class="form-control" size="5" id="filter_max_hp" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_atk" value="" /><label class="label-inline">ATK</label><input type="text" class="form-control" size="5" id="filter_max_atk" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_def" value="" /><label class="label-inline">DEF</label><input type="text" class="form-control" size="5" id="filter_max_def" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_spd" value="" /><label class="label-inline">SPD</label><input type="text" class="form-control" size="5" id="filter_max_spd" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_effhp" value="" /><label class="label-inline">E.HP</label><input type="text" class="form-control" size="5" id="filter_max_effhp" value="" />
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <div class="optimizer-filter-min adjustment">Min</div><div class="optimizer-filter-max">Max</div>
+                                                                <input type="text" class="form-control" size="5" id="filter_min_crate" value="" /><label class="label-inline">Crit</label><input type="text" class="form-control" size="5" id="filter_max_crate" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_cdmg" value="" /><label class="label-inline">CritDMG</label><input type="text" class="form-control" size="5" id="filter_max_cdmg" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_res" value="" /><label class="label-inline">RES</label><input type="text" class="form-control" size="5" id="filter_max_res" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_acc" value="" /><label class="label-inline">ACC</label><input type="text" class="form-control" size="5" id="filter_max_acc" value="" />
+                                                                <input type="text" class="form-control" size="5" id="filter_min_dps" value="" /><label class="label-inline">Dmg</label><input type="text" class="form-control" size="5" id="filter_max_dps" value="" />                                                            </div>
+                                                        </div>
+                                                        <div class="row optimizer-filter-hidden">
+                                                            <div class="col-md-6 no-padding">
+                                                                <input type="text" class="form-control" size="5" id="filter_min_effhp_d" value="" /><label class="label-inline">E.HP D</label><input type="text" class="form-control" size="5" id="filter_max_effhp_d" value="" />
+                                                            </div>
+                                                            <div class="col-md-6 no-padding-right">
+                                                                <input type="text" class="form-control" size="5" id="filter_min_rune_avg" value="" /><label class="label-inline">Effcy%</label><input type="text" class="form-control" size="5" id="filter_max_rune_avg" value="" />
+                                                            </div>
+                                                        </div>
+                                                        <div id="optimizer-filters-toggle"></div>
+                                                    </div>
+                                                    <div id="panel-optimizer-filters-mode">
+                                                        <div class="checkbox space">
+                                                            <input id="opt_prefiltered" class="settings" data-setting="optimizer_prefiltered" type="checkbox" value=""><label for="opt_prefiltered"></label>
+                                                            <div class="checkbox-label" data-checkbox="opt_prefiltered">Use Prefiltered Mode</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="panel panel-default" id="panel-optimizer-buttons">
+                                                    <div class="panel-heading">
+                                                        <div class="information-tooltips-wrapper"><input type="text" class="settings form-control" data-setting="general_threadCount" id="opt_thread_count" placeholder="Threads" value="4" /><div class="information-tooltips" data-name="optimizer_threads"></div></div>
+                                                        <div class="information-tooltips-wrapper"><input type="text" class="form-control" id="opt_max_permutations" placeholder="Max Permutations" value="" /><div class="information-tooltips" data-name="optimizer_max_permutation"></div></div>
+                                                        </div>
+                                                    <div class="panel-body">
+                                                        <div id="optimizer-status" class="estimate">
+                                                            <div id="optimizer-status-left">
+                                                                <p id="optimizer-status-desc">Estimated builds:</p>
+                                                                <p id="optimizer-status-numbers">0</p>
+                                                                <div id="optimizer-status-found">Builds found:<br /><span id="optimizer-status-found-number">0</span></div>
+                                                            </div>
+                                                            <div id="optimizer-status-right">
+                                                                Maximum number of builds for your current setup.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                        <button type="button" class="btn start" id="optimization-control">Optimize</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="optimizertable-options">
+                                                    <div class="checkbox">
+                                                        <input id="opt_load_current" class="settings" data-setting="optimizer_loadCurrent" type="checkbox" value="" checked="checked"><label for="opt_load_current"></label>
+                                                        <div class="checkbox-label" data-checkbox="opt_load_current">Load data for current mode only</div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div id="optimizertable-export">
+                                                    <div id="optimizertable-export-btn" class="optimizertable-menu">
+                                                        <div class="optimizertable-menu-text">Export as CSV<span class="loading-small"></span></div>
+                                                    </div>
+                                                </div>
+                                                <div id="optimizertable-header">
+                                                    <div id="optimizertable-showActual" data-max="15" data-mode="a" class="optimizertable-menu active"><div class="optimizertable-menu-text">actual stats</div></div>
+                                                    <div id="optimizertable-show12" data-max="12" data-mode="m" class="optimizertable-menu"><div class="optimizertable-menu-text">+12</div></div>
+                                                    <div id="optimizertable-show15" data-max="15" data-mode="m" class="optimizertable-menu"><div class="optimizertable-menu-text">+15</div></div>
+                                                </div>
+
+                                                <div class="clearfix"></div>
+
+                                                <div id="optimizerGridPinned" style="width:100%; height:300px;"></div>
+
+                                                <div class="clearfix"></div>
+                                                <div id="optimizerGrid-wrapper"><div id="optimizerGrid" style="width:100%; height:518px;"></div><div class='tableDmgOptions'></div></div>
+                                                <div id="pager-wrapper"><div id="pager" style="width:100%;height:20px;"></div><div class="pager-rows"></div>Builds found: <span class="pager-rows-count">0</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--TAB PRIORITYLIST-->
+                                    <div role="tabpanel" class="tab-pane" id="prioritylist">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default prioritylist-dungeon">
+                                                    <div class="panel-heading">
+                                                        <select class="form-control" name="prioritylist-dungeon-select" id="prioritylist-dungeon-select" style="width: 50%;"></select>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div id="prioritylist-dungeon-monsters"></div>
+                                                        <div id="prioritylist-monsters">
+                                                            <input class="search" placeholder="Search & add monster" />
+                                                            <div id="prioritylist-monsters-body">
+                                                                <ul class="list"></ul>
+                                                                <ul class="pagination"></ul>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default prioritylist-weights">
+                                                    <div class="panel-heading">Select weights<button class="btn btn-primary btn-xs" id="prioritylist-weights-default" type="submit">Default</button></div>
+                                                    <div class="panel-body">
+                                                        <div class="col-md-6 prioritylist-weights-column"></div>
+                                                        <div class="col-md-6 prioritylist-weights-column"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default prioritylist-ranking">
+                                                    <div class="panel-heading">Ranking</div>
+                                                    <div class="panel-body">
+                                                        <table id="prioritylist-ranking-table" class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Unit</th>
+                                                                    <th>Score</th>
+                                                                    <th>Runes</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--TAB SPEEDTUNE-->
+                                    <div role="tabpanel" class="tab-pane" id="speedtune">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="panel panel-default speedtune-monsterdata">
+                                                    <div class="panel-heading">Pick your team</div>
+                                                    <div class="panel-body">
+                                                        <div id="speedtune-monsters">
+                                                            <input class="search" placeholder="Search" />
+                                                            <ul class="list"></ul>
+                                                            <div class="speedtune-monsterdata-footer">
+                                                                <div id="speedtune-monster-create">Create Monster</div>
+                                                                <ul class="pagination"></ul>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="panel panel-default speedtune-monsterview">
+                                                    <div id="speedtune-tower"><span>SPD Tower:</span><input type="text" id="speedtune-tower-value" class="form-control" value="" /></div>
+                                                    <div id="speedtune-teams">Team Storage<div class="sel-arrow"></div></div>
+                                                    <div id="speedtune-mode"><span>Stats:</span><span class="speedtune-mode-switch active" data-mode="a">Actual</span><span class="speedtune-mode-switch" data-mode="m">+15</span></div>
+                                                    <div class="panel-heading">&nbsp;</div>
+                                                    <div class="panel-body">
+                                                        <div class="col-md-3 speedtune-monsterwrapper"></div>
+                                                        <div class="col-md-3 speedtune-monsterwrapper"></div>
+                                                        <div class="col-md-3 speedtune-monsterwrapper"></div>
+                                                        <div class="col-md-3 speedtune-monsterwrapper"></div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-md-3 col-md-offset-3 speedtune-monsterwrapper"></div>
+                                                        <div class="col-md-3 speedtune-monsterwrapper"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--TAB COMPARE-->
+                                    <div role="tabpanel" class="tab-pane" id="compare">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <div class="compare-action compare-newSession">New session</div>
+                                                        <div class="compare-action compare-refresh">Refresh</div>
+                                                        <div class="compare-lastSessionTime">Last session start: <span></span></div>
+                                                        <div class="pull-right">
+                                                            <div class="compare-filterText">Filter:</div>
+                                                            <div class="compare-filter">
+                                                                <div class="compare-action active" data-field="location">Only inventory</div>
+                                                                <div class="compare-action" data-field="stars">Only 5/6*</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="compare-monsterHolder">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!---TAB Import/Export-->
+                                    <div role="tabpanel" class="tab-pane active" id="export">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Use the field beneath to import your runes and monsters.<br /><br /><a href="https://github.com/Xzandro/sw-exporter/releases" target="_blank">Summoner's War Exporter (SWEX)</a> is an excellent tool to extract the necessary data from your device. SWEX also provides an in-app Help section where everything important is written.
+                                                <div id="import_export_message"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            
+                                            <div class="col-md-6 import-file">
+                                                <div id="import-file" class="panel panel-default">
+                                                    <div class="panel-heading">Import via json file</div>
+                                                    <div class="panel-body">
+                                                        <input type='file' id="fileUpload" style="width: 100%;">
+                                                        <div class="row">
+                                                            <button type="submit" class="btn btn-primary" id="btn_import">Import</button>
+                                                            <div class="pull-right"><button type="submit" class="btn btn-primary btn_backup" data-key="swrunes_saveddata">Export data</button></div>
+                                                        </div> 
+                                                    </div>
+                                                </div>                  
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div id="export-settings" class="panel panel-default">
+                                                    <div class="panel-heading">Import options</div>
+                                                    <div class="panel-body">
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="import_refreshData" checked="checked" value="" id="import_refreshData"><label for="import_refreshData"></label>
+                                                            <div class="checkbox-label" data-checkbox="import_refreshData">Keep builds. (Refresh data) <div class="information-tooltips" data-name="import_refreshData"></div></div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="import_refreshData_overrideLocation" checked="checked" value="" id="import_refreshData_overrideLocation"><label for="import_refreshData_overrideLocation"></label>
+                                                            <div class="checkbox-label" data-checkbox="import_refreshData_overrideLocation">Override Origin Locations <div class="information-tooltips" data-name="import_refreshData_overrideLocation"></div></div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="import_replaceMonsterNames" checked="checked" value="" id="import_replace_in_storage"><label for="import_replace_in_storage"></label>
+                                                            <div class="checkbox-label" data-checkbox="import_replace_in_storage">Replace "(In Storage)" in Monster names with *</div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="import_filter_useless_monster" value="" id="import_filter_useless_monster"><label for="import_filter_useless_monster"></label>
+                                                            <div class="checkbox-label" data-checkbox="import_filter_useless_monster">Don't import Rainbowmon / Devilmon</div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="import_filter_norunes_monster" value="" id="import_filter_norunes_monster"><label for="import_filter_norunes_monster"></label>
+                                                            <div class="checkbox-label" data-checkbox="import_filter_norunes_monster">Don't import monsters without runes</div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="import_filter_grade_monster" value="" id="import_filter_grade_monster"><label for="import_filter_grade_monster"></label>
+                                                            <div class="checkbox-label" data-checkbox="import_filter_grade_monster">Don't import monsters with grade < <input type="number" style="width: 35px;padding-left:5px;" id="import_filter_grade_monster_input" name="monster" min="1" max="6" value="6"> (monsters with runes equipped will be imported regardless)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--TAB NOTES-->
+                                    <div role="tabpanel" class="tab-pane" id="notes">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">Notes</div>
+                                                    <div class="panel-body">
+                                                        <ul>
+                                                            <li><strong>Optimizing with 5 Focus Stats:</strong> choose 5 stats that are the most important for your monster. The optimizer will include these stats into its calculations and suggest the most suitable builds.</li>
+                                                            <li><strong>Working with filters:</strong> this function lets you differentiate the good builds from the exceptional builds. Put in some thresholds like Crit = 70%, desired minimum HP values and so on.</li>
+                                                            <li><strong>Working with +12, 15 and actual stats.</strong> You currently don’t want to spend mana for upgrading your runes? Go with the “actual stats” option. Is +12 enough for you? Choose “+12”. And for sure you know what to do if +15 is your only way to go. Any change of these options will force a quick revaluation of your builds.</li>
+                                                            <li><strong>Are you happy with a new build?</strong> Equip and lock these runes! That way they won’t be suggested in any further builds. If there’s this one rune you don’t want to use, just click “Exclude” and optimize again.</li>
+                                                            <li><strong>Runes and substat upgrades:</strong> When choosing a set, take the column "substat upgrades" into consideration – the number of additional substat upgrades indicates how many additional stats you can get when powering up these runes.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">New features</div>
+                                                    <div class="panel-body">
+                                                        <ul>
+                                                            <li>
+                                                                Prioritylist Improvements and Fixes
+                                                                <ul>
+                                                                    <li>Unlock / Lock runes</li>
+                                                                    <li>See rune status and count directly in this section</li>
+                                                                    <li>Added 'Other' weight section</li>
+                                                                    <li>Fixed bug if you didnt import any data before</li>
+                                                                    <li>Fixed bug of not refreshing the ranking if you input 0 as a weight</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                LiveSync
+                                                                <ul>
+                                                                    <li>Added all events of the Ingame Rune Manager UI</li>
+                                                                    <li>You need Summoners War Exporter 0.0.21 or newer!</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>Added raw rune stats gain to the build overview (rune bonuses)</li>
+                                                            <li>Build tab design is more streamlined now (possible improvements in the future)</li>
+                                                            <li>Added new monster (Paladin & Cow Girl Light)</li>
+                                                            <li>Added DMG column to the monster table</li>
+                                                            <li>Added back substat upgrades (only if you hover over a build though)</li>
+                                                            <li>Fixed bug with monster search list not refreshing after adding a monster</li>
+                                                        </ul>
+                                                        <h2 class="section">How to use this app</h2>
+                                                        <ol>
+                                                            <li>You need the tool Summoners War Exporter (SWEX) to extract all your runes from the game, fully automatically. Download it <a href="https://github.com/Xzandro/sw-exporter/releases" target="_blank">here</a></li>
+                                                            <li>SWEX provides an in-app Help section where everything important is written.</li>
+                                                            <li>SWEX delivers your JSON file that can be imported to our app. Et voila!</li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">Credits</div>
+                                                    <div class="panel-body">
+                                                        Windows 10 Universal App (& Web Version) created by <a href="https://www.reddit.com/user/Xzandro/" target="_blank">Xzandro</a>
+                                                        <h2 class="section">Changelog</h2>
+                                                        view the complete <a href="http://changelog.swop.one/" target="_blank">changelog</a> on our website
+                                                        <h2 class="section">swarfarm</h2>
+                                                        for some features we need the <a href="https://swarfarm.com/" target="_blank">swarfarm</a> API to get the requiered data. So thanks to porksmash for that.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!--TAB SETTINGS-->
+                                    <div role="tabpanel" class="tab-pane" id="settings">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">Lock monster on import</div>
+                                                    <div class="panel-body">
+                                                        Chose your monsters that have to be locked with every import:
+                                                        <table id="tableMonstersLocked" data-striped="true" data-toggle="table" data-maintain-selected="true" data-search="true" data-searchTimeOut="0" data-pagination="true" data-sort-order="desc">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th data-field="runesLocked" data-checkbox="true"></th>
+                                                                    <th data-sortable="true" data-field="name">Name</th>
+                                                                    <th data-field="unit_id" data-searchable="false" data-visible="false"></th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">General settings</div>
+                                                    <div class="panel-body">
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="general_alwaysActualStats" checked="checked" value="" id="general_alwaysActualStats"><label for="general_alwaysActualStats"></label>
+                                                            <div class="checkbox-label" data-checkbox="general_alwaysActualStats">Show actual stats in monster table as default</div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="settings" data-setting="general_showGrindvalues" checked="checked" value="" id="general_showGrindvalues"><label for="general_showGrindvalues"></label>
+                                                            <div class="checkbox-label" data-checkbox="general_showGrindvalues">Show grind values in runes table</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">BackUp</div>
+                                                    <div class="panel-body">
+                                                        Here you can back up all important files. Settings and your current monster and rune data. To restore your settings you can select the settings.json and import it right away. You need to refresh the page afterwards.
+                                                        <div class="clearfix"></div>
+                                                        <input id="settingsFileUpload" type="file" style="display:none;" />
+                                                        <button type="submit" class="btn btn-primary btn_backup_restore">Restore settings</button>
+                                                        <button type="submit" class="btn btn-primary btn_backup" data-key="swop_settings">Settings</button>
+                                                        <button type="submit" class="btn btn-primary btn_backup" data-key="swrunes_saveddata">Current data</button>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">Theme</div>
+                                                    <div class="panel-body">
+                                                        <select class="form-control settings" data-setting="theme" name="theme" id="setting-theme">
+                                                            <option value="dark">Dark</option>
+                                                            <option value="mint">Mint</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="shareDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Share Monsters',primaryCommandText: 'Share',secondaryCommandText: 'Cancel'}">
+            <textarea class="form-control" maxlength="500" placeholder="Note..." name="shareNote" id="shareDialogNote"></textarea>
+            <div id="shareDialogLink-wrapper">
+                <label for="shareDialogLink">Share Link</label>
+                <input name="share_link" class="form-control" id="shareDialogLink" type="text" value="">
+                <p>Copied to clipboard!</p>
+            </div>
+        </div>
+        <div id="aiDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Auto Import',primaryCommandText: 'Import',secondaryCommandText: 'Cancel'}">
+            <p>New monster and rune data available! Do you want to import new data from the JSON file? Please keep in mind that your currently saved builds will be deleted.</p>
+            <div class="checkbox">
+                <input type="checkbox" value="" id="aiDialog-dialogBlock" class="dialogBlock"><label for="aiDialog-dialogBlock"></label>
+                <div class="checkbox-label" data-checkbox="aiDialog-dialogBlock">Do not show the dialog in this session again.</div>
+            </div>
+        </div>
+        <div id="coDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Crafts Value',primaryCommandText: 'Equip',secondaryCommandText: 'Cancel'}">
+            <p class="dialog-description">You need to enter the actual craft value to determine the new exact rune substat value.</p>
+            <ul>
+                <li class="dialogCraftData-id">ID: <span></span></li>
+                <li class="dialogCraftData-type">Type: <span></span></li>
+                <li class="dialogCraftData-set">Set: <span></span></li>
+                <li class="dialogCraftData-stat">Stat: <span></span></li>
+                <li class="dialogCraftData-grade">Grade: <span></span></li>
+                <li class="dialogCraftData-values">Values: <span></span></li>
+            </ul>
+            <select class="form-control" name="enchant_substat" id="enchant-substat" placeholder="Select the substat which then will be enchanted.">
+                <option value="">Select the substat which then will be exchanged.</option>
+            </select>
+            <input name="craftsValue" class="form-control" id="dialogCraftsValue" type="number" value="">
+        </div>
+
+        <div id="dmgcustomDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Customize your DMG value',primaryCommandText: 'Apply',secondaryCommandText: 'Close'}">
+            <div class="row">
+                <div id="dmgCustom-general-col" class="col-md-4">
+                    <div class="col-background-wrapper">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="dmgcustom_mode" value="standard" checked>
+                                Option 1: Use our standard formula
+                            </label>
+                        </div>
+                        <div><label for="dmgcustom_addcrit">Apply additional crit, for passives, leader skills or buffs:</label><input type="text" class="form-control" id="dmgcustom_addcrit" placeholder="e.g.: 15%" value="" /></div>
+                    </div>
+                </div>
+                <div id="dmgCustom-monster-col" class="col-md-4">
+                    <div class="col-background-wrapper">
+                        <div class="row">
+                            <div id="dmgCustom-monstername">Unknown</div><span id="dmgCustom-monsterbasestats" class="glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="bottom" title="Base stats" data-content=""></span>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">
+                                <div><label for="dmgCustom-field-hp">HP</label><input id="dmgCustom-field-hp" type="text" data-field="a_hp" class="form-control" value="" /></div>
+                                <div><label for="dmgCustom-field-atk">Attack</label><input id="dmgCustom-field-atk" type="text" data-field="a_atk" class="form-control" value="" /></div>
+                                <div><label for="dmgCustom-field-crate">Crit</label><input id="dmgCustom-field-crate" type="text" data-field="a_crate" class="form-control" value="" /></div>
+                                <div><label for="dmgCustom-field-acc">Accuracy</label><input id="dmgCustom-field-acc" type="text" data-field="a_acc" class="form-control" value="" /></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div><label for="dmgCustom-field-def">Defense</label><input id="dmgCustom-field-def" type="text" data-field="a_def" class="form-control" value="" /></div>
+                                <div><label for="dmgCustom-field-spd">Speed</label><input id="dmgCustom-field-spd" type="text" data-field="a_spd" class="form-control" value="" /></div>
+                                <div><label for="dmgCustom-field-cdmg">CDMG</label><input id="dmgCustom-field-cdmg" type="text" data-field="a_cdmg" class="form-control" value="" /></div>
+                                <div><label for="dmgCustom-field-res">Resistance</label><input id="dmgCustom-field-res" type="text" data-field="a_res" class="form-control" value="" /></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="dmgCustom-result">Damage: <span id="dmgCustom-resultValue">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-background-wrapper">
+                        <div class="row">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="dmgcustom_mode" value="custom">
+                                    Option 2: Damage output per skill<span id="info-buildings-wrapper"> | Buildings: <span id="info-buildings" class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="popover" data-placement="bottom" title="Buildings information" data-content=""></span></span>
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <div id="dmgCustom-skill-select">
+                                    <label>Select monster:</label>
+                                    <select id="dmgCustom-monster" class="form-control" name="dmgCustom-monster"></select>
+                                    <select id="dmgCustom-skills" class="form-control" name="dmgCustom-skills"></select>
+                                </div>
+                                <label>Enter Multipliers:</label>
+                                <div class="skill-multiplier-wrapper">
+                                    <div class="skill-multiplier">
+                                        <select class="form-control skill-multiplier-select" name="skill_multiplier">
+                                            <option value="atk">ATK%</option>
+                                            <option value="spd">SPD</option>
+                                            <option value="hp">HP%</option>
+                                            <option value="def">DEF%</option>
+                                        </select>
+                                        <input type="text" class="form-control skill-multiplier-input" placeholder="eg.: 425%" value="" />
+                                        <input type="text" class="form-control skill-multiplier-input-special" placeholder="eg.: 0.3" value="" />
+                                        <div class="skill-multiplier-action-add">+</div>
+                                    </div>
+                                </div>
+                                <div class="dmgcustom_data_fields"><label for="dmgcustom_enemy_hp">Enter enemy hp:</label><input type="text" class="form-control" id="dmgcustom_enemy_hp" value="" /></div>
+                                <div class="dmgcustom_data_fields"><label for="dmgcustom_enemy_spd">Enter enemy speed:</label><input type="text" class="form-control" id="dmgcustom_enemy_spd" value="" /></div>
+                                <div><label for="dmgcustom_defense">Enter enemy defense:</label><input type="text" class="form-control" id="dmgcustom_defense" placeholder="800 if left blank" value="" /></div>
+                                <div><label for="dmgcustom_skillups">Enter skillups:</label><div id="dmgcustom_skillups_wrapper"><input type="text" class="form-control" id="dmgcustom_skillups" placeholder="e.g.: 30%" value="" /><div id="dmgcustom_skillups_max">MAX</div></div></div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_ignoredef"><label for="dmgcustom_ignoredef"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_ignoredef">Ignore defense</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_isBomb"><label for="dmgcustom_isBomb"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_isBomb">Is a bomb</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_useBuildings"><label for="dmgcustom_useBuildings"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_useBuildings">Use buildings</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_useGWBuildings"><label for="dmgcustom_useGWBuildings"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_useGWBuildings">Use guildwar buildings</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_useDefbreak"><label for="dmgcustom_useDefbreak"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_useDefbreak">Use Def Break</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_useAtkbuff"><label for="dmgcustom_useAtkbuff"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_useAtkbuff">Use Atk Buff</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_useDefbuff"><label for="dmgcustom_useDefbuff"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_useDefbuff">Use Def Buff</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_useSpdbuff"><label for="dmgcustom_useSpdbuff"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_useSpdbuff">Use Spd Buff</div>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" value="" id="dmgcustom_isCrit" checked="checked"><label for="dmgcustom_isCrit"></label>
+                                    <div class="checkbox-label" data-checkbox="dmgcustom_isCrit">Critical Hit</div>
+                                </div>
+                                <label for="skill-lead-select">Enter Leader Skill:</label>
+                                <div>
+                                    <select id="skill-lead-select" class="form-control skill-lead-select" name="skill_lead">
+                                        <option value="atk">ATK%</option>
+                                        <option value="crate">Crit</option>
+                                        <option value="cdmg">CDMG</option>
+                                        <option value="spd">SPD</option>
+                                        <option value="hp">HP%</option>
+                                        <option value="def">DEF%</option>
+                                    </select>
+                                    <input type="text" class="form-control skill-lead-input" placeholder="eg.: 30%" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="swfDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Select Monster',primaryCommandText: 'OK',secondaryCommandText: 'Cancel'}">
+            <p class="desc">Monster name was not found. Please select the monster manually.</p>
+            <select id="swarfarm-monsterSelect" class="form-control" name="monsterSelect">
+            </select>
+        </div>
+        
+        <div id="renamemonsterDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Rename Monster',primaryCommandText: 'OK',secondaryCommandText: 'Cancel'}">
+            <label for="monster-name-input">Monster Name</label><input type="text" class="form-control" id="monster-name-input" value="" />
+        </div>
+        
+        <div id="createmonsterDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Create Monster',secondaryCommandText: 'Close'}">
+            <div class="row">
+                <div id="createMonster-monster-col" class="col-md-6 main-columns">
+                    <div class="col-background-wrapper">
+                        <div class="row">
+                            <p>You can create a monster if you manually type in name, level and base stats.</p>
+                            <div class="clearfix"></div>
+                            <div class="col-md-6">
+                                <div><label for="monster_name">Name</label><input id="monster_name" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_hp">HP</label><input id="monster_hp" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_atk">Attack</label><input id="monster_atk" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_crate">Crit</label><input id="monster_crate" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_acc">Accuracy</label><input id="monster_acc" type="text" class="form-control" value="" /></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div><label for="monster_level">Level</label><input id="monster_level" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_def">Defense</label><input id="monster_def" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_spd">Speed</label><input id="monster_spd" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_cdmg">CDMG</label><input id="monster_cdmg" type="text" class="form-control" value="" /></div>
+                                <div><label for="monster_res">Resistance</label><input id="monster_res" type="text" class="form-control" value="" /></div>
+                            </div>
+                            <button type="submit" class="win-button" id="monster_create">Create</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 main-columns">
+                    <div class="col-background-wrapper">
+                        <div class="row">
+                            <p>Here you can create a monster (at level 40) just by selecting the desired one (at level 40). All stats and relevant other information will be retrieved automatically.</p>
+                            <select id="createmonsterDialog-monsterSelect" class="form-control" name="createmonsterDialog-monsterSelect"></select>
+                            <button type="submit" class="win-button" id="monster_create_template">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="runeEnchantDialog" data-win-control="WinJS.UI.ContentDialog" data-win-options="{title: 'Equip Craft',secondaryCommandText: 'Close'}">
+            <div class="row">
+                <div class="col-md-12 crafts-optimizedrune">
+                    <div class="panel panel-default" id="allrune-panel">
+                        <div class="panel-body">
+                            <div class="crafts-grindstones-wrapper">
+                                <div class="crafts-grindstones-head">
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-3"><span class="">PowerUp</span></div>
+                                        <div class="col-md-3">Grade</div>
+                                    </div>
+                                </div>
+                                <div class="crafts-grindstones-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="presetDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Manage your presets</h4>
+                    </div>
+                    <div class="modal-body">
+                        <select class="form-control" name="presetDialogSelect" id="presetDialogSelect" style="width: 30%;"></select>
+                        <div class="clearfix"></div>
+                        <div id="presetDialog-head">
+                            <div id="presetDialog-actions">
+                                <div id="presetDialog-action-new" class="presetDialog-action">New</div>
+                                <div id="presetDialog-action-newopt" class="presetDialog-action">New from Optimizer</div>
+                                <div id="presetDialog-action-save" class="presetDialog-action" style="display: none;">Save</div>
+                                <div id="presetDialog-action-savenew" class="presetDialog-action">Save as new</div>
+                                <div id="presetDialog-action-delete" class="presetDialog-action" style="display: none;">Delete</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="presetDialog-title"><span id="presetDialog-tHolder"><input type="text" class="form-control" id="presetDialog-tHolderInput" placeholder="Preset name" value="" /></span><div id="presetDialog-edittitle"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="presetDialog-wrapper">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="presetDialog-section">SETS</div>
+                                    <label class="label-inline" for="opt_set1_dialog">Set 1</label>
+                                    <select class="form-control label-inline-input" name="opt_set1_dialog" id="opt_set1_dialog">
+                                        <option value="">-</option>
+                                        <option value="Accuracy">Accuracy</option>
+                                        <option value="Blade">Blade</option>
+                                        <option value="Despair">Despair</option>
+                                        <option value="Destroy">Destroy</option>
+                                        <option value="Determination">Determination</option>
+                                        <option value="Endure">Endure</option>
+                                        <option value="Energy">Energy</option>
+                                        <option value="Enhance">Enhance</option>
+                                        <option value="Fatal">Fatal</option>
+                                        <option value="Fight">Fight</option>
+                                        <option value="Focus">Focus</option>
+                                        <option value="Guard">Guard</option>
+                                        <option value="Nemesis">Nemesis</option>
+                                        <option value="Rage">Rage</option>
+                                        <option value="Revenge">Revenge</option>
+                                        <option value="Shield">Shield</option>
+                                        <option value="Swift">Swift</option>
+                                        <option value="Tolerance">Tolerance</option>
+                                        <option value="Vampire">Vampire</option>
+                                        <option value="Violent">Violent</option>
+                                        <option value="Will">Will</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="presetDialog-section">SLOTS</div>
+                                    <label class="label-inline" for="opt_slot2_dialog">Slot 2</label>
+                                    <select class="form-control label-inline-input" name="opt_slot2_dialog" id="opt_slot2_dialog" multiple="multiple" style="width: 65%">
+                                        <option value="SPD">SPD</option>
+                                        <option value="ATK%">ATK%</option>
+                                        <option value="ATK flat">ATK flat</option>
+                                        <option value="DEF%">DEF%</option>
+                                        <option value="DEF flat">DEF flat</option>
+                                        <option value="HP%">HP%</option>
+                                        <option value="HP flat">HP flat</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="presetDialog-section">FOCUS</div>
+                                    <select class="form-control label-inline-input" name="opt_focus_dialog" id="opt_focus_dialog" multiple="multiple" style="width: 100%">
+                                        <option value="HP">HP</option>
+                                        <option value="ATK">ATK</option>
+                                        <option value="DEF">DEF</option>
+                                        <option value="SPD">SPD</option>
+                                        <option value="CRate">CRate</option>
+                                        <option value="CDmg">CDmg</option>
+                                        <option value="RES">RES</option>
+                                        <option value="ACC">ACC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="label-inline" for="opt_set2_dialog">Set 2</label>
+                                    <select class="form-control label-inline-input" name="opt_set2_dialog" id="opt_set2_dialog">
+                                        <option value="">-</option>
+                                        <option value="Accuracy">Accuracy</option>
+                                        <option value="Blade">Blade</option>
+                                        <option value="Despair">Despair</option>
+                                        <option value="Destroy">Destroy</option>
+                                        <option value="Determination">Determination</option>
+                                        <option value="Endure">Endure</option>
+                                        <option value="Energy">Energy</option>
+                                        <option value="Enhance">Enhance</option>
+                                        <option value="Fatal">Fatal</option>
+                                        <option value="Fight">Fight</option>
+                                        <option value="Focus">Focus</option>
+                                        <option value="Guard">Guard</option>
+                                        <option value="Nemesis">Nemesis</option>
+                                        <option value="Rage">Rage</option>
+                                        <option value="Revenge">Revenge</option>
+                                        <option value="Shield">Shield</option>
+                                        <option value="Swift">Swift</option>
+                                        <option value="Tolerance">Tolerance</option>
+                                        <option value="Vampire">Vampire</option>
+                                        <option value="Violent">Violent</option>
+                                        <option value="Will">Will</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="label-inline" for="opt_slot4_dialog">Slot 4</label>
+                                    <select class="form-control label-inline-input" name="opt_slot4_dialog" id="opt_slot4_dialog" multiple="multiple" style="width: 65%">
+                                        <option value="ATK%">ATK%</option>
+                                        <option value="ATK flat">ATK flat</option>
+                                        <option value="DEF%">DEF%</option>
+                                        <option value="DEF flat">DEF flat</option>
+                                        <option value="HP%">HP%</option>
+                                        <option value="HP flat">HP flat</option>
+                                        <option value="CRate">CRate</option>
+                                        <option value="CDmg">CDmg</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="label-inline" for="opt_set3_dialog">Set 3</label>
+                                    <select class="form-control label-inline-input" name="opt_set3_dialog" id="opt_set3_dialog">
+                                        <option value="">-</option>
+                                        <option value="Accuracy">Accuracy</option>
+                                        <option value="Blade">Blade</option>
+                                        <option value="Despair">Despair</option>
+                                        <option value="Destroy">Destroy</option>
+                                        <option value="Determination">Determination</option>
+                                        <option value="Endure">Endure</option>
+                                        <option value="Energy">Energy</option>
+                                        <option value="Enhance">Enhance</option>
+                                        <option value="Fatal">Fatal</option>
+                                        <option value="Fight">Fight</option>
+                                        <option value="Focus">Focus</option>
+                                        <option value="Guard">Guard</option>
+                                        <option value="Nemesis">Nemesis</option>
+                                        <option value="Rage">Rage</option>
+                                        <option value="Revenge">Revenge</option>
+                                        <option value="Shield">Shield</option>
+                                        <option value="Swift">Swift</option>
+                                        <option value="Tolerance">Tolerance</option>
+                                        <option value="Vampire">Vampire</option>
+                                        <option value="Violent">Violent</option>
+                                        <option value="Will">Will</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="label-inline" for="opt_slot6_dialog">Slot 6</label>
+                                    <select class="form-control label-inline-input" name="opt_slot6_dialog" id="opt_slot6_dialog" multiple="multiple" style="width: 65%">
+                                        <option value="ATK%">ATK%</option>
+                                        <option value="ATK flat">ATK flat</option>
+                                        <option value="DEF%">DEF%</option>
+                                        <option value="DEF flat">DEF flat</option>
+                                        <option value="HP%">HP%</option>
+                                        <option value="HP flat">HP flat</option>
+                                        <option value="RES">RES</option>
+                                        <option value="ACC">ACC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox space">
+                                        <input type="checkbox" value="" id="opt_no_broken_dialog"><label for="opt_no_broken_dialog"></label>
+                                        <div class="checkbox-label" data-checkbox="opt_no_broken_dialog">No broken sets</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="preset-section" style="margin-bottom: 20px;">FILTERS</div>
+                                    <div id="preset-filters" class="row">
+                                        <div class="col-md-6 no-padding">
+                                            <div class="optimizer-filter-min">Min</div><div class="optimizer-filter-max">Max</div>
+                                            <input type="text" class="form-control" size="5" id="filter_min_hp_dialog" value="" /><label class="label-inline">HP</label><input type="text" class="form-control" size="5" id="filter_max_hp_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_atk_dialog" value="" /><label class="label-inline">ATK</label><input type="text" class="form-control" size="5" id="filter_max_atk_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_def_dialog" value="" /><label class="label-inline">DEF</label><input type="text" class="form-control" size="5" id="filter_max_def_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_spd_dialog" value="" /><label class="label-inline">SPD</label><input type="text" class="form-control" size="5" id="filter_max_spd_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_effhp_dialog" value="" /><label class="label-inline">E.HP</label><input type="text" class="form-control" size="5" id="filter_max_effhp_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_effhp_d_dialog" value="" /><label class="label-inline">E.HP D</label><input type="text" class="form-control" size="5" id="filter_max_effhp_d_dialog" value="" />
+                                            
+                                        </div>
+                                        <div class="col-md-6 no-padding-right">
+                                            <div class="optimizer-filter-min adjustment">Min</div><div class="optimizer-filter-max">Max</div>
+                                            <input type="text" class="form-control" size="5" id="filter_min_crate_dialog" value="" /><label class="label-inline">Crit</label><input type="text" class="form-control" size="5" id="filter_max_crate_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_cdmg_dialog" value="" /><label class="label-inline">CritDMG</label><input type="text" class="form-control" size="5" id="filter_max_cdmg_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_res_dialog" value="" /><label class="label-inline">RES</label><input type="text" class="form-control" size="5" id="filter_max_res_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_acc_dialog" value="" /><label class="label-inline">ACC</label><input type="text" class="form-control" size="5" id="filter_max_acc_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_dps_dialog" value="" /><label class="label-inline">Dmg</label><input type="text" class="form-control" size="5" id="filter_max_dps_dialog" value="" />
+                                            <input type="text" class="form-control" size="5" id="filter_min_rune_avg_dialog" value="" /><label class="label-inline">Effcy%</label><input type="text" class="form-control" size="5" id="filter_max_rune_avg_dialog" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div id="presetDialog-alerts"></div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
