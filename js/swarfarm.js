@@ -29,7 +29,8 @@
     }
 
     SWO.api.swarfarm.prepareData = function () {
-        $.getJSON('/data/bestiary.json', function (monster) {
+        //note 
+        $.getJSON('https://swarfarm.com/api/bestiary.json', function (monster) {
             $.each(monster, function (index, value) {
                 SWO.api.swarfarm.monsterDataSelect += '<option value="' + value.com2us_id + '">' + value.name + ' (' + value.element + ')</option>';
                 SWO.api.swarfarm.bestiary[value.com2us_id] = value;
